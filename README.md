@@ -4,11 +4,11 @@ Libreface is a tool for facial emotion recognition and can be used on OpenSense.
 
 ## OpenSense
 
-OpenSense is a platform for multimodal real-time acquisition and analysis of social signals. It allows precisely synchronized capture and processing of human behavioral signals. OpenSense is built on Microsoft's "Platform for Situated Intelligence" and supports various sensor modules and machine learning tools. Developers can easily integrate new components. An intuitive graphical user interface simplifies the creation of application pipelines. OpenSense is freely available for academic research.
+[OpenSense](https://github.com/ihp-lab/OpenSense) is a platform for multimodal real-time acquisition and analysis of social signals. It allows precisely synchronized capture and processing of human behavioral signals. OpenSense is built on Microsoft's [Platform for Situated Intelligence](https://github.com/microsoft/psi) and supports various sensor modules and machine learning tools. Developers can easily integrate new components. An intuitive graphical user interface simplifies the creation of application pipelines. OpenSense is freely available for academic research.
 
 ## LibreFace as an OpenSense Component
 
-LibreFace has been integrated as an OpenSense component, allowing it to be used alongside other OpenSense elements in a zero-code setup for real-time or non-real-time inference. The source code of this component is available in the OpenSense repository. By default, execution requires CUDA support, but with this repo you don't need CUDA support because it runs on CPU.
+[LibreFace](https://github.com/ihp-lab/LibreFace) has been integrated as an OpenSense allowing it to be used alongside other OpenSense elements in a zero-code setup for real-time or non-real-time inference. The source code of this component is available in the OpenSense repository. By default, execution requires CUDA support, but with this repo you don't need CUDA support because it runs on CPU.
 
 ## Prerequisites
 
@@ -55,6 +55,4 @@ This is necessary because some files over 100 MB have been stored using Git LFS.
 2. Click **Run/Stop** to start processing.
 
 ---
-Check out 
-https://github.com/ihp-lab/LibreFace
-https://github.com/ihp-lab/OpenSense
+
