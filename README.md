@@ -8,7 +8,16 @@ OpenSense is a platform for multimodal real-time acquisition and analysis of soc
 
 ## LibreFace as an OpenSense Component
 
-LibreFace has been integrated as an OpenSense component, allowing it to be used alongside other OpenSense elements in a zero-code setup for real-time or non-real-time inference. The source code of this component is available in the OpenSense repository. By default, execution requires CUDA support, but other ONNX providers can be used when compiling from the source code. A sample pipeline for testing can be downloaded and used.
+LibreFace has been integrated as an OpenSense component, allowing it to be used alongside other OpenSense elements in a zero-code setup for real-time or non-real-time inference. The source code of this component is available in the OpenSense repository. By default, execution requires CUDA support, but with this repo you don't need CUDA support because it runs on CPU.
+
+## Prerequisites
+
+Before installing LibreFace, ensure that the following dependencies are installed:
+
+- Windows 10 or higher
+- Python: [Download here](https://www.python.org/downloads/)
+- .NET 9: [Download here](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+- Microsoft Kinect SDK 2: [Download here](https://www.microsoft.com/en-us/download/details.aspx?id=44561)
 
 ## Installation & Setup
 
