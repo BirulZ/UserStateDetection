@@ -1,0 +1,453 @@
+{
+	Id: "1b007e5b-531b-48c7-8832-0d315cbe8d75",
+	Name: "OpenSense with LibreFace",
+	Description: "",
+	DeliveryPolicy: {
+		InitialQueueSize: 1,
+		MaximumQueueSize: 1,
+		Name: "LatestMessage"
+	},
+	Instances: [
+		{
+			ComponentType: "OpenSense.Components.Psi.Media.MediaCaptureConfiguration, OpenSense.Components.Psi.Media.Windows, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Raw: {
+				CaptureAudio: false,
+				BacklightCompensation: {
+					Value: false,
+					Auto: false
+				},
+				Brightness: {
+					Value: 128,
+					Auto: false
+				},
+				ColorEnable: {
+					Value: false,
+					Auto: false
+				},
+				Contrast: {
+					Value: 5,
+					Auto: false
+				},
+				Gain: {
+					Value: 0,
+					Auto: false
+				},
+				Gamma: {
+					Value: 0,
+					Auto: false
+				},
+				Hue: {
+					Value: 0,
+					Auto: false
+				},
+				Saturation: {
+					Value: 32,
+					Auto: false
+				},
+				Sharpness: {
+					Value: 2,
+					Auto: false
+				},
+				WhiteBalance: {
+					Value: 4500,
+					Auto: true
+				},
+				Focus: {
+					Value: 0,
+					Auto: false
+				},
+				UseInSharedMode: false,
+				Width: 4096,
+				Height: 3072,
+				Framerate: 15.0,
+				DeviceId: "\\\\?\\usb#vid_045e&pid_097d&mi_00#a&303dd766&0&0000#{e5323777-f976-4f5b-9b55-b94699c46e44}\\global"
+			},
+			Id: "255e169c-71af-4c5b-acbf-2fe448a27b7d",
+			Name: "Media Capture",
+			Description: "",
+			Inputs: []
+		},
+		{
+			ComponentType: "OpenSense.Components.Psi.Imaging.Visualizer.ImageVisualizerConfiguration, OpenSense.WPF.Components.Psi.Imaging.Visualizer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Id: "624c1e24-70d7-4742-8934-dd2fce51cbd2",
+			Name: "Image Visualizer",
+			Description: "",
+			Inputs: [
+				{
+					Id: "f00f39a6-eba4-4727-a9d5-8d46f9e85018",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "255e169c-71af-4c5b-acbf-2fe448a27b7d",
+					RemotePort: {
+						Identifier: "Video",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.MediaPipe.NET.MediaPipeConfiguration, OpenSense.Components.MediaPipe.NET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Graph: "mediapipe/modules/face_landmark/face_landmark_front_cpu.pbtxt",
+			InputSidePackets: [
+				{
+					Identifier: "use_prev_landmarks",
+					PacketType: "Bool",
+					Value: true
+				},
+				{
+					Identifier: "num_faces",
+					PacketType: "Int",
+					Value: 1
+				},
+				{
+					Identifier: "with_attention",
+					PacketType: "Bool",
+					Value: false
+				}
+			],
+			InputStreams: [
+				{
+					Identifier: "image",
+					PacketType: "ImageFrame"
+				}
+			],
+			OutputStreams: [
+				{
+					Identifier: "multi_face_landmarks",
+					PacketType: "NormalizedLandmarkListVector"
+				}
+			],
+			Id: "5e2d1b38-039d-4da6-89b1-0d49b71a0b8d",
+			Name: "MediaPipe",
+			Description: "",
+			Inputs: [
+				{
+					Id: "9a3bca8a-a740-4162-8df3-a80f0ce893a7",
+					LocalPort: {
+						Identifier: "image",
+						Index: null
+					},
+					RemoteId: "255e169c-71af-4c5b-acbf-2fe448a27b7d",
+					RemotePort: {
+						Identifier: "Video",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.Builtin.DefaultValueInjectorConfiguration, OpenSense.Components.Builtin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			InputAbsenceTolerance: 660000,
+			ReferenceAbsenceTolerance: 660000,
+			Id: "c7353823-379a-4546-bb9c-861dfcd8ab89",
+			Name: "Default Value Injector",
+			Description: "",
+			Inputs: [
+				{
+					Id: "404936c8-e834-4030-be0a-ff444169a960",
+					LocalPort: {
+						Identifier: "ReferenceIn",
+						Index: null
+					},
+					RemoteId: "255e169c-71af-4c5b-acbf-2fe448a27b7d",
+					RemotePort: {
+						Identifier: "Video",
+						Index: null
+					},
+					DeliveryPolicy: null
+				},
+				{
+					Id: "45850af4-a08d-4044-aa8b-34352cd3b96a",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "5e2d1b38-039d-4da6-89b1-0d49b71a0b8d",
+					RemotePort: {
+						Identifier: "multi_face_landmarks",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.CollectionOperators.NullToEmptyReplacerConfiguration, OpenSense.Components.CollectionOperators, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Id: "40180be3-4450-4ecf-ab2f-a0856530a5b8",
+			Name: "Null to Empty Replacer",
+			Description: "",
+			Inputs: [
+				{
+					Id: "d6e31dd9-3b53-4508-b0b0-4638dccc6152",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "c7353823-379a-4546-bb9c-861dfcd8ab89",
+					RemotePort: {
+						Identifier: "Out",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.WPF.Components.MediaPipe.NET.Visualizer.NormalizedLandmarkListVectorVisualizerConfiguration, OpenSense.WPF.Components.MediaPipe.NET.Visualizer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Mute: false,
+			CircleRadius: 3,
+			LineThickness: 1,
+			DrawLandmarks: false,
+			DrawLips: false,
+			DrawLeftEye: false,
+			DrawRightEye: false,
+			DrawLeftEyebrow: false,
+			DrawRightEyebrow: false,
+			DrawLeftIris: false,
+			DrawRightIris: false,
+			DrawFaceOval: false,
+			DrawTesselation: true,
+			Id: "a1773752-1028-4b95-aae7-40e5f1b79a22",
+			Name: "MediaPipe Landmark Visualizer",
+			Description: "",
+			Inputs: [
+				{
+					Id: "23f67731-f093-4fec-9c93-3ebf9a86a81e",
+					LocalPort: {
+						Identifier: "DataIn",
+						Index: null
+					},
+					RemoteId: "40180be3-4450-4ecf-ab2f-a0856530a5b8",
+					RemotePort: {
+						Identifier: "Out",
+						Index: null
+					},
+					DeliveryPolicy: null
+				},
+				{
+					Id: "4b99ca67-52e6-4a1d-aaae-aaafc5e8b625",
+					LocalPort: {
+						Identifier: "ImageIn",
+						Index: null
+					},
+					RemoteId: "255e169c-71af-4c5b-acbf-2fe448a27b7d",
+					RemotePort: {
+						Identifier: "Out",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.LibreFace.LibreFaceDetectorConfiguration, OpenSense.Components.LibreFace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Id: "5cd6e9e3-d752-48a3-8a26-3e024c29de6a",
+			Name: "LibreFace Detector",
+			Description: "",
+			Inputs: [
+				{
+					Id: "a867d728-f1b4-413c-a825-77dc916f1eb3",
+					LocalPort: {
+						Identifier: "DataIn",
+						Index: null
+					},
+					RemoteId: "40180be3-4450-4ecf-ab2f-a0856530a5b8",
+					RemotePort: {
+						Identifier: "Out",
+						Index: null
+					},
+					DeliveryPolicy: null
+				},
+				{
+					Id: "1d866acd-4e87-497b-8ab6-e5bebe94c090",
+					LocalPort: {
+						Identifier: "ImageIn",
+						Index: null
+					},
+					RemoteId: "255e169c-71af-4c5b-acbf-2fe448a27b7d",
+					RemotePort: {
+						Identifier: "Video",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.CollectionOperators.ElementAtConfiguration, OpenSense.Components.CollectionOperators, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Index: 0,
+			Id: "c173be78-ee64-49f0-8310-24e1a9ebfe58",
+			Name: "Element At",
+			Description: "",
+			Inputs: [
+				{
+					Id: "9f347f66-e6da-4a12-bb39-af713c741048",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "5cd6e9e3-d752-48a3-8a26-3e024c29de6a",
+					RemotePort: {
+						Identifier: "AlignedImagesOut",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.Psi.Imaging.Visualizer.ImageVisualizerConfiguration, OpenSense.WPF.Components.Psi.Imaging.Visualizer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Id: "9a453500-1c03-45c6-a219-53e420455891",
+			Name: "Image Visualizer",
+			Description: "",
+			Inputs: [
+				{
+					Id: "cfaab60e-cf76-429c-92a5-0927469d2302",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "c173be78-ee64-49f0-8310-24e1a9ebfe58",
+					RemotePort: {
+						Identifier: "Out",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.CollectionOperators.ElementAtConfiguration, OpenSense.Components.CollectionOperators, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Index: 0,
+			Id: "fd3a6042-62d7-4624-8d57-5de663524ce3",
+			Name: "Element At",
+			Description: "",
+			Inputs: [
+				{
+					Id: "9f69ed1e-2bf3-42d6-858f-e9bbec94fca3",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "5cd6e9e3-d752-48a3-8a26-3e024c29de6a",
+					RemotePort: {
+						Identifier: "ActionUnitPresenceOut",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.LibreFace.Visualizer.ActionUnitPresenceVisualizerConfiguration, OpenSense.WPF.Components.LibreFace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Id: "b28794cc-c2df-46a2-8b90-e73415762581",
+			Name: "Action Unit Presence Visualizer",
+			Description: "",
+			Inputs: [
+				{
+					Id: "657bb61c-843d-4cb0-aeb2-d7b6d88df39c",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "fd3a6042-62d7-4624-8d57-5de663524ce3",
+					RemotePort: {
+						Identifier: "Out",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.CollectionOperators.ElementAtConfiguration, OpenSense.Components.CollectionOperators, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Index: 0,
+			Id: "da4414e2-1aaf-4ceb-871f-94f7e9424da6",
+			Name: "Element At",
+			Description: " ",
+			Inputs: [
+				{
+					Id: "a827657d-447f-4431-9235-0a1f93739772",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "5cd6e9e3-d752-48a3-8a26-3e024c29de6a",
+					RemotePort: {
+						Identifier: "ActionUnitIntensityOut",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.LibreFace.Visualizer.ActionUnitIntensityVisualizerConfiguration, OpenSense.WPF.Components.LibreFace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Id: "efcbed1c-af1a-4df6-a237-cdfd97fcd34c",
+			Name: "Action Unit Intensity Visualizer",
+			Description: "",
+			Inputs: [
+				{
+					Id: "0a9c28b3-98ad-402f-9226-431def1a9681",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "da4414e2-1aaf-4ceb-871f-94f7e9424da6",
+					RemotePort: {
+						Identifier: "Out",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.CollectionOperators.ElementAtConfiguration, OpenSense.Components.CollectionOperators, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Index: 0,
+			Id: "12844b6d-9f96-4a29-92e8-066b5a887c28",
+			Name: "Element At",
+			Description: "",
+			Inputs: [
+				{
+					Id: "71b68961-8db8-43ad-9db0-b056df736b03",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "5cd6e9e3-d752-48a3-8a26-3e024c29de6a",
+					RemotePort: {
+						Identifier: "FacialExpressionOut",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		},
+		{
+			ComponentType: "OpenSense.Components.LibreFace.Visualizer.FacialExpressionVisualizerConfiguration, OpenSense.WPF.Components.LibreFace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+			Id: "8ec74368-7db7-4976-89ac-d9edfda1f6fa",
+			Name: "Facial Expression Visualizer",
+			Description: "",
+			Inputs: [
+				{
+					Id: "ac0da5fe-c387-41e8-934f-6fbdbbe8f306",
+					LocalPort: {
+						Identifier: "In",
+						Index: null
+					},
+					RemoteId: "12844b6d-9f96-4a29-92e8-066b5a887c28",
+					RemotePort: {
+						Identifier: "Out",
+						Index: null
+					},
+					DeliveryPolicy: null
+				}
+			]
+		}
+	]
+}
