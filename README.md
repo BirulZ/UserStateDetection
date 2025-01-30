@@ -1,48 +1,51 @@
 # UserStateDetection
-# LoremIpsum
 
-An extension for Sublime Text 2 and 3!
+Libreface is a tool for facial emotion recognition and can be used on OpenSense. It enables real-time capture and analysis of facial expressions and other social signals.
 
-It allows you to Insert Lorem Ipsum in the editor via menu items or keyboard shortcut.
+## OpenSense
 
-Select how much text you want from the menu item in `Edit->Text->Lorem Ipsum` or on the right click menu in `Lorem Ipsum`.
+OpenSense is a platform for multimodal real-time acquisition and analysis of social signals. It allows precisely synchronized capture and processing of human behavioral signals. OpenSense is built on Microsoft's "Platform for Situated Intelligence" and supports various sensor modules and machine learning tools. Developers can easily integrate new components. An intuitive graphical user interface simplifies the creation of application pipelines. OpenSense is freely available for academic research.
 
-Just press the shortcut key (Alt+Shift+L) to add Lorem Ipsum text. Keep pressing to add more.
+## LibreFace as an OpenSense Component
 
-Alternatively, you can also specify the number of paragraphs, by writing a number, and pressing the shortcut key. Lorem Ipsum will check if there is a number directly preceding the selection range, and replace it with that many paragraphs of lorem ipsum. Addind a decimal point, defines the approximate number of words per paragraph.
+LibreFace has been integrated as an OpenSense component, allowing it to be used alongside other OpenSense elements in a zero-code setup for real-time or non-real-time inference. The source code of this component is available in the OpenSense repository. By default, execution requires CUDA support, but other ONNX providers can be used when compiling from the source code. A sample pipeline for testing can be downloaded and used.
 
-## Examples
+## Installation & Setup
 
-Generate a dummy title for a blog, and a few paragraphs
+**Important:** Do **not** download this repository as a ZIP file! Instead, clone it using the following command:
 
-- Press the shortcut once, to generate a single line of lorem upsum, of about 15 words
+```sh
+ git clone https://github.com/BirulZ/UserStateDetection
+```
 
-## Features
+This is necessary because some files over 100 MB have been stored using Git LFS.
 
-1. Uses only words from [the original Lorem ipsum text](http://www.lipsum.com/)
-2. Randomly generates text from selection of words
-3. Often starts with `Lorem ipsum`
-4. Leaves the inserted text un-selected, so you can insert some more straight away (rapid tapping to get as much lorem as you want)
-5. Shortcut key, `Edit -> Text -> Lorem Ipsum...` sub-menu, and context menu activation
-6. Variable size of text from just `a bit` to more than you can shake a stick at!
-8. Works with multiple selection ranges
-9. Does not leave trailing spaces
+### Preparation
 
-## Install
+1. Navigate to the directory where the repository was cloned.
+2. Copy the `mediapipe` folder to `C:\Windows\System32`.
+3. If your webcam is not yet connected, do so now.
 
-### Package Control
+### Starting the Application
 
-The easiest way to install this is with [Package Control](http://wbond.net/sublime\_packages/package\_control).
+1. Go back to the cloned repository and run `OpenSense.WPF.exe` **as an administrator**.
+2. A window will open. Click on **Pipeline Editor**.
+3. In the Pipeline Editor:
+   - Click **File -> Open**.
+   - Navigate to `UserStateDetection/PipeLineInjector`.
+   - Select the file `20230825__LibreFace__Injector__AzureKinect.pipe.json`.
+4. Under **Components**:
+   - Go to **Media Capture** and select your camera in the **Settings**.
+   - Set the **Resolution** to **1920x1080** or lower.
+   - Go to **MediaPipe** and select the **Graph** file `face_landmark_front_cpu.pbtxt` in the **Settings**.
+     - File path: `C:\Windows\System32\mediapipe\modules\face_landmark`.
 
- * If you just went and installed Package Control, you probably need to restart Sublime Text before doing this next bit.
- * Bring up the Command Palette (Command+Shift+P on OS X, Control+Shift+P on Linux/Windows).
- * Select "Package Control: Install Package" (it'll take a few seconds)
- * Select LoremIpsum when the list appears.
+### Running the Application
 
-Package Control will automatically keep Git up to date with the latest version.
-
-Report bugs here, and I will do my best to repair them (or better still - make the fix, and send me a pull request).
+1. Select **Runner** in the ribbon menu at the top.
+2. Click **Run/Stop** to start processing.
 
 ---
-
-If you have some problems or improvements with it, contact me via GitHub.
+Check out 
+https://github.com/ihp-lab/LibreFace
+https://github.com/ihp-lab/OpenSense
