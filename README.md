@@ -8,7 +8,7 @@ Libreface is a tool for facial emotion recognition and can be used on OpenSense.
 
 ## LibreFace as an OpenSense Component
 
-[LibreFace](https://github.com/ihp-lab/LibreFace) has been integrated as an OpenSense allowing it to be used alongside other OpenSense elements in a zero-code setup for real-time or non-real-time inference. The source code of this component is available in the OpenSense repository. By default, execution requires CUDA support, but with this repo you don't need CUDA support because it runs on CPU.
+[LibreFace](https://github.com/ihp-lab/LibreFace) has been integrated as an OpenSense component allowing it to be used alongside other OpenSense elements in a zero-code setup for real-time or non-real-time inference. The source code of this component is available in the OpenSense repository. By default, execution requires CUDA support, but with this repo you don't need CUDA support because it runs on CPU.
 
 ## Prerequisites
 
