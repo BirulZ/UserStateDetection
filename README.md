@@ -16,18 +16,18 @@ Before installing LibreFace, ensure that the following dependencies are installe
 
 - Windows 10 or higher
 - Python: [Download here](https://www.python.org/downloads/)
-- .NET 9: [Download here](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+- .NET 8: [Download here](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - Microsoft Kinect SDK 2: [Download here](https://www.microsoft.com/en-us/download/details.aspx?id=44561)
 
 ## Installation & Setup
 
-**Important:** Do **not** download this repository as a ZIP file! Instead, clone it using the following command:
+You can download this repository as a ZIP file or clone it using the following command (if you want to clone it, make sure git is installed [Download here](https://git-scm.com/downloads))
 
 ```sh
  git clone https://github.com/BirulZ/UserStateDetection
 ```
 
-This is necessary because some files over 100 MB have been stored using Git LFS.
+
 
 ### Preparation
 
