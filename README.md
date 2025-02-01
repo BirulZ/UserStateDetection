@@ -21,7 +21,7 @@ Before installing LibreFace, ensure that the following dependencies are installe
 
 ## Installation & Setup
 
-You can download this repository as a ZIP file or clone it using the following command (if you want to clone it, make sure git is installed :[Download here](https://git-scm.com/downloads))
+You can download this repository as a ZIP file or clone it using the following command (if you want to clone it, make sure git is installed [Download here](https://git-scm.com/downloads))
 
 ```sh
  git clone https://github.com/BirulZ/UserStateDetection
