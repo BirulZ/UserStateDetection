@@ -43,7 +43,7 @@ You can download this repository as a ZIP file or clone it using the following c
 3. A window will open. Click on **Pipeline Editor**.
 4. In the Pipeline Editor:
    - Click **File -> Open**.
-   - Navigate to `UserStateDetection/PipeLineInjector`.
+   - Navigate to `UserStateDetection/utils/PipeLineInjector`.
    - Select the file `20230825__LibreFace__Injector__AzureKinect.pipe.json`.
 5. Under **Components**:
    - Go to **Media Capture** and select your camera in the **Settings**.
