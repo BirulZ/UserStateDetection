@@ -1,4 +1,4 @@
-# UserStateDetection
+# UserStateDetection with LibreFace
 
 Libreface is a tool for facial emotion recognition and can be used on OpenSense. It enables real-time capture and analysis of facial expressions and other social signals.
 
